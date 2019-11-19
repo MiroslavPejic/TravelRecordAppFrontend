@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TravelRecordApp"
+             x:Class="TravelRecordApp.MainPage">
+
+    <StackLayout VerticalOptions="Center"
+                 Margin="32,0">
+        <Image x:Name="iconImage"
+               Aspect="AspectFit"
+               HorizontalOptions="FillAndExpand"
+               Margin="0, 0, 0, 50"
+               Rotation="90"/>
+        <!-- Place new controls here -->
+        <Entry x:Name="emailField"
+               Placeholder="Email address"
+               Keyboard="Email"
+               />
+        <Entry x:Name="passwordField"
+               Placeholder="Password"
+               IsPassword="True"/>
+        <!-- <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ActivityIndicator x:Name="loadingSpinner"
+                               IsRunning="false"
+                               IsVisible="False"
+                               HeightRequest="25"
+                               WidthRequest="25"
+                               Grid.Row="0"
+                               Grid.Column="0"/>
+            <Label x:Name="loginLabel"
+                   Text="Logging in ..."
+                   TextColor="{StaticResource blueColor}"
+                   IsVisible="false"
+                   Grid.Row="0"
+                   Grid.Column="1"/>
+        </Grid> -->
+        <Button x:Name="LoginButton"
+                Margin="0,32,0,0"
+                Text="Log in"
+                Clicked="LoginButton_Clicked"
+                Style="{StaticResource normalButton}"/>
+        <Button x:Name="registerUserButton"
+                Text="Register"
+                Margin="0,8,0,0"
+                Clicked="registerUserButton_Clicked"
+                Style="{StaticResource normalButton}"/>
+    </StackLayout>
+
+</ContentPage>
