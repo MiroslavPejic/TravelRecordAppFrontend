@@ -47,6 +47,7 @@ namespace TravelRecordApp
 
                         if (user.password == passwordField.Text)
                         {
+                            DependencyService.Get<ILoadingPageService>().HideLoadingPage();
                             await Navigation.PushAsync(new HomePage());
                         }
                         else
@@ -60,15 +61,15 @@ namespace TravelRecordApp
                         DependencyService.Get<ILoadingPageService>().HideLoadingPage();
                         await DisplayAlert("Error", "There was problem logging you in", "Ok");
                     }
-
-                    LoginButton.IsEnabled = true;
-                    registerUserButton.IsEnabled = true;
                 }
                 catch(Exception ex)
                 {
                     DependencyService.Get<ILoadingPageService>().HideLoadingPage();
                     await DisplayAlert("Error", ex.Message, "Ok");
                 }
+
+                LoginButton.IsEnabled = true;
+                registerUserButton.IsEnabled = true;
             }
         }
 
