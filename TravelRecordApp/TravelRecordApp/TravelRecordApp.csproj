@@ -88,4 +88,10 @@
   <ItemGroup>
     <Folder Include="Logic\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Common\LoadingIndicatorPage_2.xaml.cs">
+      <DependentUpon>LoadingIndicatorPage_2.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

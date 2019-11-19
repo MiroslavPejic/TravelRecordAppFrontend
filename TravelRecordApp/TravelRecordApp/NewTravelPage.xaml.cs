@@ -9,6 +9,7 @@ using TravelRecordApp.Model;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XFLoadingPageService;
 
 namespace TravelRecordApp
 {
@@ -24,10 +25,15 @@ namespace TravelRecordApp
         {
             base.OnAppearing();
 
+            DependencyService.Get<ILoadingPageService>().InitLoadingPage(new LoadingIndicatorPage2());
+            DependencyService.Get<ILoadingPageService>().ShowLoadingPage();
+
             var locator = CrossGeolocator.Current;
             var position = await locator.GetPositionAsync();
-
+            
             var (venues, message) = await Venue.GetVenues(position.Latitude, position.Longitude);
+
+            DependencyService.Get<ILoadingPageService>().HideLoadingPage();
 
             if (venues.Count < 1)
             {
