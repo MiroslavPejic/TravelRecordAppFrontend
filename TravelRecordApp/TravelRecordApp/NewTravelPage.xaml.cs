@@ -16,9 +16,14 @@ namespace TravelRecordApp
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class NewTravelPage : ContentPage
 	{
+        Post post;
+
 		public NewTravelPage ()
 		{
 			InitializeComponent ();
+
+            post = new Post();
+            containerStackLayout.BindingContext = post;
 		}
 
         protected override async void OnAppearing()
@@ -51,18 +56,14 @@ namespace TravelRecordApp
 
                 var firstCategory = selectedItem.categories.FirstOrDefault();
 
-                Post post = new Post()
-                {
-                    Experience = experienceEntry.Text,
-                    CategoryId = firstCategory.id,
-                    CategoryName = firstCategory.name,
-                    Address = selectedItem.location.address,
-                    Distance = selectedItem.location.distance.ToString(),
-                    Latitude = selectedItem.location.lat,
-                    Longitude = selectedItem.location.lng,
-                    VenueName = selectedItem.name,
-                    UserId = App.user.id,
-                };
+                post.CategoryId = firstCategory.id;
+                post.CategoryName = firstCategory.name;
+                post.Address = selectedItem.location.address;
+                post.Distance = selectedItem.location.distance.ToString();
+                post.Latitude = selectedItem.location.lat;
+                post.Longitude = selectedItem.location.lng;
+                post.VenueName = selectedItem.name;
+                post.UserId = App.user.Id;
 
                 /*
                 using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
@@ -92,7 +93,6 @@ namespace TravelRecordApp
                 experienceEntry.Text = string.Empty;
                 await Navigation.PopAsync();
                 await DisplayAlert("Success", "Inserted experience into database", "Ok");
-
             }
             catch(NullReferenceException nre)
             {

@@ -6,7 +6,7 @@
     <TabbedPage.ToolbarItems>
         <ToolbarItem Text="Add"
                      IconImageSource="ic_action_add.png"
-                     Clicked="ToolbarItem_Clicked"/>
+                     Command="{Binding NavCommand}"/>
     </TabbedPage.ToolbarItems>
     
     <local:HistoryPage Title="History Page"

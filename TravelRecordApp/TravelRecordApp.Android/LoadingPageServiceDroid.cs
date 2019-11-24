@@ -43,7 +43,7 @@ namespace XFLoadingPageService.Droid
                     Xamarin.Forms.Application.Current.MainPage.Height));
 
                 var renderer = loadingIndicatorPage.GetOrCreateRenderer();
-
+                
                 _nativeView = renderer.View;
 
                 _dialog = new Dialog(CrossCurrentActivity.Current.Activity);
@@ -54,7 +54,7 @@ namespace XFLoadingPageService.Droid
                 window.SetLayout(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
                 window.ClearFlags(WindowManagerFlags.DimBehind);
                 window.SetBackgroundDrawable(new ColorDrawable(Android.Graphics.Color.Transparent));
-
+                
                 _isInitialized = true;
             }
         }

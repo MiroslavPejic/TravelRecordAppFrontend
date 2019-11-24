@@ -23,53 +23,15 @@ namespace TravelRecordApp
 
         private async void LoginButton_Clicked(object sender, EventArgs e)
         {
-            DependencyService.Get<ILoadingPageService>().InitLoadingPage(new LoadingIndicatorPage());
-            bool isEmailEmpty    = string.IsNullOrEmpty(emailField.Text);
-            bool isPasswordEmpty = string.IsNullOrEmpty(passwordField.Text);
+            bool canLogin = await Users.Login(emailField.Text, passwordField.Text);
 
-            if(isEmailEmpty || isPasswordEmpty)
+            if (canLogin)
             {
-                await DisplayAlert("Error", "Please fill in both fields", "Ok");
+                await Navigation.PushAsync(new HomePage());
             }
             else
             {
-                try
-                {
-                    LoginButton.IsEnabled = false;
-                    registerUserButton.IsEnabled = false;
-                    DependencyService.Get<ILoadingPageService>().ShowLoadingPage();
-
-                    var user = (await App.mobileServiceClient.GetTable<Users>().Where(u => u.email == emailField.Text).ToListAsync()).FirstOrDefault();
-
-                    if (user != null)
-                    {
-                        App.user = user;
-
-                        if (user.password == passwordField.Text)
-                        {
-                            DependencyService.Get<ILoadingPageService>().HideLoadingPage();
-                            await Navigation.PushAsync(new HomePage());
-                        }
-                        else
-                        {
-                            DependencyService.Get<ILoadingPageService>().HideLoadingPage();
-                            await DisplayAlert("Error", "Username or password incorrect", "Ok");
-                        }
-                    }
-                    else
-                    {
-                        DependencyService.Get<ILoadingPageService>().HideLoadingPage();
-                        await DisplayAlert("Error", "There was problem logging you in", "Ok");
-                    }
-                }
-                catch(Exception ex)
-                {
-                    DependencyService.Get<ILoadingPageService>().HideLoadingPage();
-                    await DisplayAlert("Error", ex.Message, "Ok");
-                }
-
-                LoginButton.IsEnabled = true;
-                registerUserButton.IsEnabled = true;
+                await DisplayAlert("Error", "Failed to login, please try again.", "Ok");
             }
         }
 
