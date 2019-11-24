@@ -12,20 +12,23 @@ namespace TravelRecordApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegisterPage : ContentPage
     {
-        Users user;
         public RegisterPage()
         {
             InitializeComponent();
-
-            user = new Users();
-            containerStackLayout.BindingContext = user;
         }
 
         private async void RegisterButton_Clicked(object sender, EventArgs e)
         {
             if(passwordField.Text == confirmPasswordField.Text)
             {
-                Users.Register(user);
+                // Register a user
+                Users user = new Users()
+                {
+                    email = emailField.Text,
+                    password = passwordField.Text
+                };
+
+                await App.mobileServiceClient.GetTable<Users>().InsertAsync(user);
             }
             {
                 await DisplayAlert("Error", "Passwords don't match", "Cancel");

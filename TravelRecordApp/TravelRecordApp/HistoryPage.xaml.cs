@@ -34,7 +34,7 @@ namespace TravelRecordApp
 
             try
             {
-                var posts = await Post.Read();
+                var posts = await App.mobileServiceClient.GetTable<Post>().Where(p => p.UserId == App.user.id).ToListAsync();
 
                 postListView.ItemsSource = posts;
             }

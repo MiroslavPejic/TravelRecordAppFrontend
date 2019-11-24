@@ -9,9 +9,8 @@
                      />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout x:Name="containerStackLayout">
-            <Entry x:Name="experienceEntry"
-                   Text="{Binding Experience, Mode=TwoWay}"
+        <StackLayout>
+            <Entry x:Name="experienceEntry" 
                    Placeholder="Write your experience"
                    Margin="20, 0, 20, 20"/>
             <ListView x:Name="venueListView"

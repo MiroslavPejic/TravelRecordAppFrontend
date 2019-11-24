@@ -22,13 +22,27 @@ namespace TravelRecordApp
         {
             base.OnAppearing();
 
-            var postTable = await Post.Read();
+            //using(SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
+            //{
+            var postTable = await App.mobileServiceClient.GetTable<Post>().Where(p => p.UserId == App.user.id).ToListAsync();
 
-            var categoryCount = Post.PostCaegories(postTable);
+            var categories = (from p in postTable
+                                  orderby p.CategoryId
+                                  select p.CategoryName).Distinct().ToList();
+
+            Dictionary<string, int> categoryCount = new Dictionary<string, int>();
+
+            foreach(var category in categories)
+            {
+                var count = postTable.Where(p => p.CategoryName == category).ToList().Count;
+
+                categoryCount.Add(category, count);
+            }
 
             categoriesListView.ItemsSource = categoryCount;
 
             postCountLabel.Text = postTable.Count.ToString();
+            //}
         }
     }
 }

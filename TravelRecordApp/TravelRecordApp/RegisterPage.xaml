@@ -5,17 +5,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="TravelRecordApp.RegisterPage">
-    <StackLayout x:Name="containerStackLayout"
-                 VerticalOptions="Center"
+    <StackLayout VerticalOptions="Center"
                  Margin="32,0">
         <!-- Place new controls here -->
         <Entry x:Name="emailField"
-               Text="{Binding Email, Mode=TwoWay}"
                Placeholder="Email address"
                Keyboard="Email"
                />
         <Entry x:Name="passwordField"
-               Text="{Binding Password, Mode=TwoWay}"
                Placeholder="Password"
                IsPassword="True"/>
         <Entry x:Name="confirmPasswordField"
