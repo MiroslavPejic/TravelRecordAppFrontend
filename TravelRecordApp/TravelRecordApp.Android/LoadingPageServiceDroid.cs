@@ -24,11 +24,11 @@ namespace XFLoadingPageService.Droid
 {
     public class LodingPageServiceDroid : ILoadingPageService
     {
-        private Android.Views.View _nativeView;
+        private Android.Views.View nativeView;
 
-        private Dialog _dialog;
+        private Dialog dialog;
 
-        private bool _isInitialized;
+        private bool isInitialized;
 
         public void InitLoadingPage(ContentPage loadingIndicatorPage)
         {
@@ -44,29 +44,29 @@ namespace XFLoadingPageService.Droid
 
                 var renderer = loadingIndicatorPage.GetOrCreateRenderer();
 
-                _nativeView = renderer.View;
+                nativeView = renderer.View;
 
-                _dialog = new Dialog(CrossCurrentActivity.Current.Activity);
-                _dialog.RequestWindowFeature((int)WindowFeatures.NoTitle);
-                _dialog.SetCancelable(false);
-                _dialog.SetContentView(_nativeView);
-                Window window = _dialog.Window;
+                dialog = new Dialog(CrossCurrentActivity.Current.Activity);
+                dialog.RequestWindowFeature((int)WindowFeatures.NoTitle);
+                dialog.SetCancelable(false);
+                dialog.SetContentView(nativeView);
+                Window window = dialog.Window;
                 window.SetLayout(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
                 window.ClearFlags(WindowManagerFlags.DimBehind);
                 window.SetBackgroundDrawable(new ColorDrawable(Android.Graphics.Color.Transparent));
 
-                _isInitialized = true;
+                isInitialized = true;
             }
         }
 
         public void ShowLoadingPage()
         {
             // check if the user has set the page or not
-            if (!_isInitialized)
+            if (!isInitialized)
                 InitLoadingPage(new LoadingIndicatorPage()); // set the default page
 
             // showing the native loading page
-            _dialog.Show();
+            dialog.Show();
         }
 
         private void XamFormsPage_Appearing(object sender, EventArgs e)
@@ -81,7 +81,7 @@ namespace XFLoadingPageService.Droid
         public void HideLoadingPage()
         {
             // Hide the page
-            _dialog.Hide();
+            dialog.Hide();
         }
     }
 
